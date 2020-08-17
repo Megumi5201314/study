@@ -1,0 +1,17 @@
+思路：n的p次方很容易拆分为几个数相乘的形式，采用二分法拆分较为简单高效。
+
+#define M 10003
+int PowMod(int n, int p)
+{
+	if (p == 1)
+	{
+		return n % M;
+	}
+	int temp = Pow(n, p/2);
+	int result = (temp*temp) % M;
+	if (p % 2 == 1)
+	{
+		result = (result*n) % M;
+	}
+	return result;
+}
