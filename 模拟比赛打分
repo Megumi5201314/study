@@ -1,0 +1,46 @@
+首先从键盘中输入选手人数，然后输入裁判对每位选手的打分情况，这里假设裁判有5位，在输入完以上要求内容后，输出每位选手的总成绩。
+
+思路：程序中使用了嵌套的for循环，外层的for循环是控制选手变化的，内层for循环是控制5位裁判打分情况的，这里要注意由于不知道选手的人数，所以存储裁判所打分数的数组的大小是随着选手人数变化的，因为有5位裁判，所以当数组下标能被5整除时则跳出内层for循环，此时计算出的总分是5位裁判给一位选手打分的结果，将此时计算出的总成绩存到另一个数组中。输出选手成绩时也是遵循上面的规律。
+
+#include<stdio.h>
+int main(void)
+{
+    int i,j=1,n;
+    float a[100],b[100],sum=0;
+    printf("\nEnter the number of players:\n");
+    scanf("%d",&n);
+    for(i=1;i<=n;i++)
+    {
+        printf("now player %d\n",i);
+        printf("please input score:\n");
+        for(;j<5*n+1;j++)
+        {
+            scanf("%f",&a[j]);
+            sum+=a[j];
+            if(j%5==0)
+            {
+                break;
+            }
+        }
+        b[i]=sum;
+        sum=0;
+        j++;
+    }
+    j=1;
+    printf("player    judgeA judgeB judgeC judgeD judgeE total\n");
+    for(i=1;i<=n;i++)
+    {
+        printf("player %d",i);
+        for(;j<5*n+1;j++)
+        {
+            printf("%8.1f",a;[j]);
+            if(j%5==0)
+            {
+                break;
+            }
+        }
+        printf("%8.1f\n",b[i]);
+        j++;
+    }
+    return 0;
+}
