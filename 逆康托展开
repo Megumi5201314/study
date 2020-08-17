@@ -1,0 +1,19 @@
+//返回数组a中当下顺序的康托映射
+int cantor(int a[], int n)       //n为数组的长度
+{
+	int ans = 0;
+	for(int i = 0; i < n; i++)
+	{
+		int x = 0;               //x用于记录公式前面的a[i]
+		int c = 1, m = 1;        //m记录后面的阶乘，c用于记录循环次数(这个数后面有几个数)
+		for(int j = i + 1; j < n; j++)
+		{
+			if(a[j] < a[i]) 
+				x++;
+			m *= c; 
+			c++;
+		}
+		ans += x * m;
+	}
+	return ans;
+}
