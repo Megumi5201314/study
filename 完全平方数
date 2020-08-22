@@ -1,0 +1,27 @@
+题目描述 
+多次查询[l,r]范围内的完全平方数个数
+
+定义整数x为完全平方数当且仅当可以找到整数y使得y*y=x
+
+输入描述:
+第一行一个数n表示查询次数
+之后n行每行两个数l,r
+输出描述:
+对于每个查询，输出一个数表示答案
+
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+    int t;
+    scanf("%d",&t);
+    while(t--)
+    {
+        int a,b,n;
+        scanf("%d%d",&a,&b);
+        n=(int)sqrt(b) - (int)sqrt(a);
+        if((int)sqrt(a) == sqrt(a)) n++;
+        printf("%d\n",n);
+    }
+    return 0;
+}
