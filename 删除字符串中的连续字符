@@ -1,0 +1,27 @@
+实现删除字符串中指定位置指定长度的连续字符串。运行后输入一个字符串，输入要删除的位置及长度，输出删除字符后的字符串。
+
+思路:（1）关键技术要点是如何实现删除，这里采用的方法是将要删除部分后面字符从要删除部分开始逐个覆盖。
+
+（2）在确定从哪个字符开始删除时读者要尤其注意，例如本实例中字符串“happy day”，字母a是这个字符串中的第2个字符，但在数组s中它的下标却是1，也就是说如果用户输入的position是2，那么开始进行覆盖的位置在数组s中的下标就应是position－1，同理可以确定出将用哪个字符开始覆盖，在本实例中也就是i的初值，通过上面的分析就很容易确定它在数组中的具体位置即position－1＋length。
+
+#include<stdio.h>
+char del(char s[],int pos,int len)
+{
+  int i;
+  for(i=pos+len-1;s[i]!='\0';i++,pos++)
+      s[pos-1]=s[i];
+   s[pos-1]='\0';
+   return s;
+}
+main()
+{
+  char str[50];
+  int position;
+  int length;
+  printf("\nPlease input string:");
+  gets（str）;
+  printf("\nPlease input delete position:");
+  scanf("%d",&length);
+  del(str,position,length);
+  printf("\nThe final string:%s\n",str);
+}
