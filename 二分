@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+/*
+
+ 分别表示 m (1 ≤ m ≤ 5 * 10^5) 条记录。
+
+下面有m行，格式为：
+
+I x （I为Input的缩写，表示购买优惠券x）；
+
+O x（O为Output的缩写，表示使用优惠券x）；
+
+? （表示这条记录不知道）。
+
+这里x为正整数，且x ≤ 10^5 。
+*/
+
+int m;
+int * x_count;
+int * x_last;
+int * unknown_record;
+char input_str[999];
+int x;
+
+#define MAX_N 100001
+#define MAX_M 500001
+
+int main() {
+    x_count = (int *)calloc(MAX_N, sizeof(int));
+    x_last = (int *)calloc(MAX_N, sizeof(int));
+    unknown_record = (int *)calloc(MAX_M, sizeof(int));
+    scanf("%d\n", &m);
+    for (int i = 0; i < m; i++) {
+        gets(input_str);
+        char flag = input_str[0];
+        if (flag == 'I' || flag == 'O') {
+            x = atoi(input_str + 2);
+            x_count[x] += (flag == 'I' ? 1 : -1);
+            if (x_count[x] > 1 || x_count[x] < 0) {
+                int j = x_last[x];
+                while (j < i && unknown_record[j] == 0) {
+                    j++;
+                }
+                if (j == i) {
+                    printf("%d\n", i + 1);
+                    return 0;
+                }
+                unknown_record[j] = 0;
+                if (x_count[x] > 1) {
+                    x_count[x] = 1;
+                }
+                else {
+                    x_count[x] = 0;
+                }                
+            }
+            x_last[x] = i;
+        }
+        else {            
+            unknown_record[i] = 1;
+        }
+    }
+    printf("-1\n");
+    return 0;    
+}
